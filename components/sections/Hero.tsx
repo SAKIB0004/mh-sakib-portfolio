@@ -63,7 +63,7 @@ export default function Hero() {
             <span className="w-2 h-2 rounded-full bg-emerald-400 relative">
               <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-60" />
             </span>
-            Available for AI/ML roles & research collaborations
+            Available for AI/ML roles
           </span>
         </motion.div>
 
