@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/* Tokens — magma colormap (saliency-map palette)                      */
+/* ------------------------------------------------------------------ */
+:root {
+  --ink: 11 8 24;            /* #0B0818 page ground          */
+  --ink-raised: 19 15 38;    /* #130F26 raised surfaces      */
+  --line: 46 40 78;          /* #2E284E hairlines            */
+  --bone: 243 238 231;       /* #F3EEE7 primary text         */
+  --dim: 172 167 196;        /* #ACA7C4 secondary text (AA)  */
+  --signal: 254 159 109;     /* #FE9F6D interactive accent   */
+
+  --heat-1: 59 15 112;       /* #3B0F70 */
+  --heat-2: 140 41 129;      /* #8C2981 */
+  --heat-3: 240 98 125;      /* #F0627D */
+  --heat-4: 254 159 109;     /* #FE9F6D */
+  --heat-5: 252 253 191;     /* #FCFDBF */
+
+  color-scheme: dark;
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  background: rgb(var(--ink));
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: rgb(var(--ink));
+  color: rgb(var(--bone));
+  font-family: var(--font-body), ui-serif, Georgia, serif;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: rgb(var(--heat-3) / 0.85);
+  color: rgb(var(--ink));
+}
+
+/* Visible keyboard focus, everywhere */
+:focus-visible {
+  outline: 2px solid rgb(var(--signal));
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Slim scrollbar */
+* { scrollbar-width: thin; scrollbar-color: rgb(var(--line)) transparent; }
+
+@layer utilities {
+  .stretch-condensed { font-stretch: 75%; }
+  .stretch-normal { font-stretch: 100%; }
+  .tabular { font-variant-numeric: tabular-nums lining-nums; }
+
+  /* Heat-gradient text, used on hover/focus of titles */
+  .heat-text {
+    background-image: linear-gradient(
+      100deg,
+      rgb(var(--heat-5)) 0%,
+      rgb(var(--heat-4)) 35%,
+      rgb(var(--heat-3)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Visually hidden but available to assistive tech */
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+
+  /* Hide scrollbar on horizontal galleries (still scrollable + focusable) */
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}
+
+/* Hero: heat spot painted over a duplicate of the name (see SaliencyName) */
+.saliency-layer {
+  background-image: radial-gradient(
+    circle clamp(150px, 20vw, 320px) at var(--mx, 70%) var(--my, 40%),
+    rgb(var(--heat-5)) 0%,
+    rgb(var(--heat-4)) 24%,
+    rgb(var(--heat-3)) 52%,
+    transparent 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion safety                                                       */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Without JS, never leave revealed content hidden */
+@media (scripting: none) {
+  [data-reveal] { transform: none !important; opacity: 1 !important; }
+}
