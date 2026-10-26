@@ -374,15 +374,6 @@ export const achievements: Achievement[] = [
     type: 'competition',
     link: 'https://www.codechef.com/users/mhsakib_12',
   },
-  {
-    id: 'icida-acceptance',
-    title: 'Research Accepted — ICIDA 2025',
-    organization: 'ICIDA 2025 International Conference',
-    year: '2025',
-    description:
-      'First-authored research on kidney stone detection with explainable AI accepted at the International Conference on Intelligent Data Analysis (ICIDA 2025).',
-    type: 'award',
-  },
 ]
 
 /**
