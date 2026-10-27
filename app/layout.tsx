@@ -3,6 +3,8 @@ import './globals.css'
 import { display, body } from '@/lib/fonts'
 import { siteConfig } from '@/data'
 import Providers from '@/components/motion/Providers'
+import WebTransitionProvider from '@/components/spider/WebTransitionProvider'
+import TerminalProvider from '@/components/terminal/TerminalProvider'
 import ScrollProgress from '@/components/motion/ScrollProgress'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
@@ -64,10 +66,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
         <Providers>
-          <ScrollProgress />
-          <Navbar />
-          {children}
-          <Footer />
+          <WebTransitionProvider>
+            <TerminalProvider>
+              <ScrollProgress />
+              <Navbar />
+              {children}
+              <Footer />
+            </TerminalProvider>
+          </WebTransitionProvider>
         </Providers>
       </body>
     </html>

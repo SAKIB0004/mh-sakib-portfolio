@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Github, Linkedin, Menu, X } from 'lucide-react'
 import { navLinks, siteConfig } from '@/data'
 import { duration, ease, stagger } from '@/lib/motion'
+import TerminalToggle from '@/components/terminal/TerminalToggle'
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -120,6 +121,7 @@ export default function Navbar() {
           </ul>
 
           <div className="flex items-center gap-1">
+            <TerminalToggle />
             <a
               href={siteConfig.github}
               target="_blank"

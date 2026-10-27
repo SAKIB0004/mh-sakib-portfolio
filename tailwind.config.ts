@@ -24,6 +24,7 @@ const config: Config = {
         bone: channel('bone'),
         dim: channel('dim'),
         signal: channel('signal'),
+        spidey: channel('spidey'),
         heat: {
           1: channel('heat-1'),
           2: channel('heat-2'),
